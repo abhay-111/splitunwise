@@ -1,7 +1,8 @@
 import { NavListItems } from "./NavItems";
 interface navItem {
     text : string,
-    iconUrl : string,
+  iconUrl: string,
+  to:string,
     isActive ?: boolean
 }
 export const SideDrawer = () => {
@@ -9,35 +10,27 @@ export const SideDrawer = () => {
 
     const  navItems: navItem[] = [
         {
-          text: "Dashboard",
+        text: "Dashboard",
+          to:"/dashboard",
           iconUrl:
             "https://res.cloudinary.com/dqzjevzuo/image/upload/v1685698423/w73wd1q8tvrhs3lpwssm.svg",
           isActive: true,
         },
         {
-          text: "Transactions",
+          text: "Montly Expenses",
+          to:'/personal-expense',
           iconUrl:
             "https://res.cloudinary.com/dqzjevzuo/image/upload/v1685698423/tbwjjumljilravljxfkh.svg",
           isActive: false,
-        },
-        {
-          text: "Schedules",
-          iconUrl:
-            "https://res.cloudinary.com/dqzjevzuo/image/upload/v1685698423/h6wapge5qupf2esyrfof.svg",
-          isActive: false,
-        },
-        {
-          text: "Users",
-          iconUrl:
-            "https://res.cloudinary.com/dqzjevzuo/image/upload/v1685702125/kuoexqtgy9qzdxx2srn5.svg",
-          isActive: false,
-        },
-        {
-          text: "Settings",
-          iconUrl:
-            "https://res.cloudinary.com/dqzjevzuo/image/upload/v1685698423/ok1tszk4ypxgi3c1ygd9.svg",
-          isActive: false,
-        },
+      },
+      {
+        text: "Daily Expenses",
+        to:'/daily-expense',
+        iconUrl:
+          "https://res.cloudinary.com/dqzjevzuo/image/upload/v1685698423/tbwjjumljilravljxfkh.svg",
+        isActive: false,
+      },
+        
       ]
   return (
     <section className="h-full  min-w-[280px]   hidden md:flex flex-col justify-between bg-black rounded-[30px] py-[60px] pl-[50px]">
@@ -53,6 +46,7 @@ export const SideDrawer = () => {
                 key={index}
                 index={index+1}
                 text={item.text}
+                to={item.to}
                 iconUrl={item.iconUrl}
               ></NavListItems>
             );

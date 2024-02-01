@@ -1,13 +1,19 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 interface navItemProps {
     text : string,
     iconUrl : string,
-    isActive ?: boolean,
+  isActive?: boolean,
+  to:string,
     index: number
 }
-export const NavListItems = ({text,iconUrl,index}:navItemProps) => {
+export const NavListItems = ({ text, iconUrl,to, index }: navItemProps) => {
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate(to)
+  }
   return (
-    <li  className="flex items-center gap-[20px] w-full cursor-pointer">
+    <li onClick={handleClick}  className="flex items-center gap-[20px] w-full cursor-pointer">
       <img src={iconUrl} className="h-[18px] w-[18px]" alt="" />
       <p
         className={
