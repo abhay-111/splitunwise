@@ -9,24 +9,12 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { getMonthlyChart } from "../../service/expenseService.js";
+// import { getMonthlyChart } from "../../service/expenseService.js";
 // import { useEffect, useState } from "react";
-// import { useFixedExpenseStore } from "../../store/fixedExpenseStore";
+import { useFixedExpenseStore } from "../../store/fixedExpenseStore";
 export const DailyExpenseChart = () => {
-  const [monthlyChart, setMonthlyChart] = useState<object[]>([]);
-  // const monthlyChart = useFixedExpenseStore((state) => state.monthlyChart);
-  console.log(monthlyChart);
-  useEffect(() => {
-    getMonthlyChart().then((data: any) => {
-      const expenseChart = data.data.monthlyChart;
-      const dummyArr: object[] = [];
-
-      Object.keys(expenseChart).forEach((val: string) => {
-        dummyArr.push(expenseChart[val]);
-      });
-      setMonthlyChart(dummyArr);
-    });
-  }, []);
+  // const [monthlyChart, setMonthlyChart] = useState<object[]>([]);
+  const monthlyChart = useFixedExpenseStore((state) => state.monthlyChart);
   return (
     <section className="flex flex-col gap-[25px] p-[30px_40px] rounded-[20px] bg-white">
       <p className="text-xl font-[600] leading-6">Daily Expenses</p>

@@ -43,6 +43,7 @@ export const AddDailyExpense = ({
               Food
             </option>
             <option value="Travel">Travel</option>
+            <option value="Stocks">Stocks</option>
             <option value="Miscelleneous">Miscelleneous</option>
             <option value="Food">Food</option>
           </select>

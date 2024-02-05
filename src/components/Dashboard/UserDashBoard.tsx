@@ -1,6 +1,8 @@
 import { DataCards } from "../common/DataCards";
 import { DailyExpenseChart } from "./DailyExpenseChart";
 import { useFixedExpenseStore } from "../../store/fixedExpenseStore";
+import { useQuery } from "@tanstack/react-query";
+import { getMonthlyChart } from "../../service/expenseService";
 interface Dimension {
   height: number;
   width: number;
@@ -17,11 +19,15 @@ const UserDashBoard = () => {
   const fixedExpenseTotal = useFixedExpenseStore(
     (state) => state.totalFixedExpense
   );
+  const setMonthlyChart = useFixedExpenseStore(
+    (state) => state.setMonthlyChart
+  );
+  const setTotalExpense = useFixedExpenseStore(
+    (state) => state.setTotalExpense
+  );
   const totalExpenses = useFixedExpenseStore((state) => state.totalExpenses);
   const MONTHLY_INCOME = 102254;
   const MUTUAL_FUNDS = 35000;
-
-  console.log("ABHAY", fixedExpenseTotal);
   const userStats: UserStat[] = [
     {
       iconUrl:
@@ -81,23 +87,41 @@ const UserDashBoard = () => {
       },
     },
   ];
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ["monthlyChart"],
+    queryFn: getMonthlyChart,
+  });
+  if (isSuccess) {
+    const expenseChart = data?.data?.monthlyChart;
+    const dummyArr: object[] = [];
+
+    Object.keys(expenseChart).forEach((val: string) => {
+      dummyArr.push(expenseChart[val]);
+    });
+    setMonthlyChart(dummyArr);
+    setTotalExpense(data?.data.totalMonthExpense);
+  }
   return (
-    <section className="flex flex-col gap-[40px]">
-      <div className="w-full  mx-auto flex gap-[36px] min-h-[120px] overflow-x-scroll no-scrollbar">
-        {userStats.map((stat, index) => {
-          return (
-            <DataCards
-              key={index}
-              statName={stat.statName}
-              statValue={stat.statValue}
-              bgColor={stat.bgColor}
-              iconUrl={stat.iconUrl}
-              dimensions={stat.dimensions}></DataCards>
-          );
-        })}
-      </div>
-      <DailyExpenseChart></DailyExpenseChart>
-    </section>
+    <>
+      {!isLoading ? (
+        <section className="flex flex-col gap-[40px]">
+          <div className="w-full  mx-auto flex gap-[36px] min-h-[120px] overflow-x-scroll no-scrollbar">
+            {userStats.map((stat, index) => {
+              return (
+                <DataCards
+                  key={index}
+                  statName={stat.statName}
+                  statValue={stat.statValue}
+                  bgColor={stat.bgColor}
+                  iconUrl={stat.iconUrl}
+                  dimensions={stat.dimensions}></DataCards>
+              );
+            })}
+          </div>
+          <DailyExpenseChart></DailyExpenseChart>
+        </section>
+      ) : null}
+    </>
   );
 };
 
