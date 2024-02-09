@@ -10,6 +10,7 @@ interface Expenses {
 export interface FixedExpenseStore {
   totalFixedExpense: number;
   expenses: Expenses;
+  dailyChart: object[];
   monthlyChart: object[];
   totalExpenses: number;
   num: number;
@@ -19,6 +20,7 @@ export const useFixedExpenseStore = create(
   devtools((set) => ({
     totalFixedExpense: 0,
     expenses: {},
+    dailyChart: [],
     monthlyChart: [],
     totalExpenses: 0,
     num: 0,
@@ -37,6 +39,12 @@ export const useFixedExpenseStore = create(
     setMonthlyChart: (chart: object[]) => {
       set((state: FixedExpenseStore) => {
         state.monthlyChart = chart;
+        return state;
+      });
+    },
+    setDailyChart: (chart: object[]) => {
+      set((state: FixedExpenseStore) => {
+        state.dailyChart = chart;
         return state;
       });
     },

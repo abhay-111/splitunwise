@@ -54,17 +54,6 @@ export const PersonalExpenseForm = () => {
     return total;
   }, [fixedExpenses]);
 
-  const isDisabled = useMemo(() => {
-    let ans: boolean = false;
-    Object.keys(fixedExpenses).forEach((key) => {
-      if (isNaN(fixedExpenses[key])) {
-        ans = true;
-        return;
-      }
-    });
-    return ans;
-  }, [fixedExpenses]);
-
   const handleChange = (e: any) => {
     setFixedExpenses((data: FixedExpenses) => {
       return {

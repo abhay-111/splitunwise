@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://localhost:8000";
+const baseUrl = "http://ec2-54-91-243-188.compute-1.amazonaws.com:8000";
 export const postFixedExpenses = async (data) => {
   await axios.post(baseUrl + "/fixed-expenses", data);
 };

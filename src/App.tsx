@@ -22,18 +22,18 @@ const Loader = () => {
   );
 };
 function App() {
-  const setFixedExpenseTotal = useFixedExpenseStore(
-    (state) => state.setTotalFixedExpense
-  );
-  const setFixedExpense = useFixedExpenseStore(
-    (state) => state.setFixedExpense
-  );
-  const setMonthlyChart = useFixedExpenseStore(
-    (state) => state.setMonthlyChart
-  );
-  const setTotalExpense = useFixedExpenseStore(
-    (state) => state.setTotalExpense
-  );
+  // const setFixedExpenseTotal = useFixedExpenseStore(
+  //   (state) => state.setTotalFixedExpense
+  // );
+  // const setFixedExpense = useFixedExpenseStore(
+  //   (state) => state.setFixedExpense
+  // );
+  // const setMonthlyChart = useFixedExpenseStore(
+  //   (state) => state.setMonthlyChart
+  // );
+  // const setTotalExpense = useFixedExpenseStore(
+  //   (state) => state.setTotalExpense
+  // );
   const queryClient = new QueryClient();
   // const client = useQueryClient();
   // const chartQuery = useQuery({

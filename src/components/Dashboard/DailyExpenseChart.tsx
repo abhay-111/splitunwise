@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -9,12 +8,13 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+
 // import { getMonthlyChart } from "../../service/expenseService.js";
 // import { useEffect, useState } from "react";
 import { useFixedExpenseStore } from "../../store/fixedExpenseStore";
 export const DailyExpenseChart = () => {
-  // const [monthlyChart, setMonthlyChart] = useState<object[]>([]);
-  const monthlyChart = useFixedExpenseStore((state) => state.monthlyChart);
+  // const [dailyChart, setMonthlyChart] = useState<object[]>([]);
+  const dailyChart = useFixedExpenseStore((state) => state.dailyChart);
   return (
     <section className="flex flex-col gap-[25px] p-[30px_40px] rounded-[20px] bg-white">
       <p className="text-xl font-[600] leading-6">Daily Expenses</p>
@@ -22,7 +22,7 @@ export const DailyExpenseChart = () => {
         <LineChart
           width={500}
           height={300}
-          data={monthlyChart}
+          data={dailyChart}
           style={{
             fontSize: "12px",
           }}
