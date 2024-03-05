@@ -13,3 +13,7 @@ export const addDailyExpense = async (data) => {
 export const getMonthlyChart = async () => {
   return await axios.get(baseUrl + "/get-monthly-chart");
 };
+
+export const getYearlyChart = async () => {
+  return await axios.get(baseUrl + "/get-yearly-chart");
+};

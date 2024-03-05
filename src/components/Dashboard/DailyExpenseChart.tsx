@@ -11,7 +11,10 @@ import {
 
 // import { getMonthlyChart } from "../../service/expenseService.js";
 // import { useEffect, useState } from "react";
-import { useFixedExpenseStore } from "../../store/fixedExpenseStore";
+import {
+  useFixedExpenseStore,
+  FixedExpenseStore,
+} from "../../store/fixedExpenseStore";
 export const DailyExpenseChart = () => {
   // const [dailyChart, setMonthlyChart] = useState<object[]>([]);
   const dailyChart = useFixedExpenseStore((state) => state.dailyChart);

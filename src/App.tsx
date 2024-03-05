@@ -4,23 +4,15 @@ import { TopNavigation } from "./components/Dashboard/TopNavigation";
 import UserDashBoard from "./components/Dashboard/UserDashBoard";
 import { SideDrawer } from "./components/Navigation/SideNav";
 import { PersonalExpenseForm } from "./components/PersonalExpense/PersonalExpenseForm";
-import { useFixedExpenseStore } from "./store/fixedExpenseStore";
-import { useEffect, useState } from "react";
-import { getFixedExpenses, getMonthlyChart } from "./service/expenseService";
-import {
-  QueryClientProvider,
-  QueryClient,
-  useQueryClient,
-  useMutation,
-  useQuery,
-} from "@tanstack/react-query";
-const Loader = () => {
-  return (
-    <section className=" h-screen w-screen top-0 left-0 fixed bg-black flex justify-center items-center">
-      <p className=" text-[44px] font-bold text-white ">Board.</p>
-    </section>
-  );
-};
+import { useEffect } from "react";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+// const Loader = () => {
+//   return (
+//     <section className=" h-screen w-screen top-0 left-0 fixed bg-black flex justify-center items-center">
+//       <p className=" text-[44px] font-bold text-white ">Board.</p>
+//     </section>
+//   );
+// };
 function App() {
   // const setFixedExpenseTotal = useFixedExpenseStore(
   //   (state) => state.setTotalFixedExpense

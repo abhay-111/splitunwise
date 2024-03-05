@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   getMonthlyChart,
   getFixedExpenses,
+  getYearlyChart,
 } from "../../service/expenseService";
 import { MonthlyBarCharts } from "./MonthlyBarCharts";
 interface Dimension {
@@ -39,7 +40,7 @@ const UserDashBoard = () => {
   const totalExpenses = useFixedExpenseStore((state) => state.totalExpenses);
   const MONTHLY_INCOME = 102254;
   const MUTUAL_FUNDS = 35000;
-  const STOCKS = 25000;
+  const STOCKS = 34000;
   const INVESTMENTS = MUTUAL_FUNDS + STOCKS;
   const userStats: UserStat[] = [
     {
@@ -134,9 +135,42 @@ const UserDashBoard = () => {
       fixedExpense: fixedExpenseTotal,
       balance: 102254 - 35000 - monthlyTotal - fixedExpenseTotal,
     });
-    setMonthlyChart(monthlyExpense);
+
     setDailyChart(dummyArr);
     setTotalExpense(data?.data.totalMonthExpense);
+  }
+
+  const yearlyChartQuery = useQuery({
+    queryKey: ["yearlyChart"],
+    queryFn: getYearlyChart,
+  });
+  if (yearlyChartQuery.isSuccess) {
+    const months: string[] = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const yearChart = yearlyChartQuery?.data.data.yearlyChart;
+    const dummyArr: object[] = [];
+    Object.keys(yearChart).forEach((val: string) => {
+      dummyArr.push({
+        name: months[yearChart[val].name],
+        investment: 60000,
+        extraExpense: yearChart[val].total,
+        fixedExpense: fixedExpenseTotal,
+        balance: 102254 - 69000 - yearChart[val].total - fixedExpenseTotal,
+      });
+    });
+    setMonthlyChart(dummyArr);
   }
 
   const fixExpQuery = useQuery({
